@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "engines": {
     "node": "v16.x"
@@ -14,8 +14,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cookie-parser": "^1.4.4",
+    "debug": "^2.6.9",
     "dotenv": "^16.0.0",
+    "express": "^4.16.1",
     "mongoose": "^6.3.0",
-    "nodemon": "^2.0.15"
+    "morgan": "^1.9.1",
+    "npm": "^2.0.15"
   }
 }
