@@ -43,6 +43,8 @@ const postSchemaSetting = {
 const postSchemaOption = {
     versionKey: false
 }
+
+
 const postSchema = new mongoose.Schema(postSchemaSetting, postSchemaOption)
 
 const Posts = mongoose.model('Posts', postSchema);
