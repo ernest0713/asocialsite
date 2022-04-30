@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-
-const postSchema = {
+const postSchemaSetting = {
     userName: {
         type: String,
         required: [true, '貼文姓名未填寫'],
@@ -41,6 +40,10 @@ const postSchema = {
     },
 
 }
+const postSchemaOption = {
+    versionKey: false
+}
+const postSchema = new mongoose.Schema(postSchemaSetting, postSchemaOption)
 
 const Posts = mongoose.model('Posts', postSchema);
 
