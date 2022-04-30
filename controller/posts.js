@@ -21,11 +21,10 @@ const posts = {
         });
     },
     deleteMany:  async (req, res, next) => {
-        const dbRes = await Posts.deleteMany({});
+        const delCount = (await Posts.deleteMany({})).deletedCount;
         res.status(200).json({
-            status: '新增貼文成功',
-            newPost: newData,
-            allPost: allData
+            status: '全部貼文已刪除',
+            message: `共刪除 ${delCount} 筆資料`
         });
     },
     deleteOne: async (req, res, next)=>{
