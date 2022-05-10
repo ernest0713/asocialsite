@@ -29,8 +29,7 @@ app.use((req,res,next)=>{
 })
 app.use((err,req,res,next)=>{
     res.status(500).send('程式發生錯誤，請聯絡系統管理員！');
-    consoel.log(err.stack);
+    console.log(err.stack);
 })
-
 
 module.exports = app;
