@@ -5,7 +5,7 @@ const logger = require('morgan');
 const cors = require('cors');
 
 const app = express();
-require('./models/db_connect');
+require('./connections/db_connect');
 
 const indexRouter = require('./routes/index');
 const postsRouter = require('./routes/posts');
