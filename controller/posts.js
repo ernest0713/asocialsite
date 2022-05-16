@@ -7,7 +7,7 @@ const posts = {
             const { sort, keyword } = req.query;
             // console.log(req.query)
             let filter = keyword ? { content: new RegExp(`${keyword}`)} : {};
-            let sortby = sort ? { createAt: 1 } : { createAt: -1 };
+            let sortby = sort ? { createAt: -1 } : { createAt: 1 };
             // console.log(filter, sortby)
             const msg = '取得貼文成功';
             const data = await Posts.find(filter).sort(sortby).populate({
