@@ -38,6 +38,11 @@ const postSchemaSetting = {
         type: Number,
         default: 0,
     },
+    users: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'users',
+        slect: 'userName userPhoto'
+    }
 
 }
 const postSchemaOption = {

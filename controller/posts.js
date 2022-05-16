@@ -7,7 +7,6 @@ const posts = {
             status: '取得貼文成功',
             data: data
         });
-
     },
     post: async (req, res, next) => {
         try {

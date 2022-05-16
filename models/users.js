@@ -8,7 +8,7 @@ const userSchemaSetting = {
     password: {
         type: String,
         min: [6, '密碼需大於6個字元'],
-        max: [12, '密碼需低於12個字元'],
+        max: [15, '密碼需低於15個字元'],
         required: [true, '密碼需填寫']
     },
     userName: {
@@ -17,7 +17,12 @@ const userSchemaSetting = {
     },
     userPhoto: {
         type: String,
-        default: 'https://reurl.cc/8o2aro',
+        default: 'https://reurl.cc/Xjmakg',
+    },
+    createAt: {
+        type: Date,
+        default: Date.now,
+        select: false,
     },
 
 }
