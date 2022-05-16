@@ -18,17 +18,17 @@ const users = {
             }
             // console.log(req.body);
             const checkEmailOnly = await Users.find(filter);
-            console.log(checkEmailOnly)
+            // console.log(checkEmailOnly)
             if( checkEmailOnly ){
                 // console.log(checkEmailOnly);
-                Res.error(res,400,'帳號已存在')
+                Res.error(res, 400,'帳號已存在')
             } else {
                 const newUser = await Users.create(data);
-                Res.success(res,200,msg,newUser);
+                Res.success(res, 200, msg, newUser);
             }
         } catch(e) {
-            const msg = '帳號格式不正確';
             console.log(e.message);
+            const msg = '帳號格式不正確';
             Res.error(res,400,msg);
         }
     }

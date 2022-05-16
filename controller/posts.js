@@ -3,19 +3,27 @@ const Res = require('../responseHandle');
 
 const posts = {
     get: async (req, res, next)=>{
-        const data = await Posts.find({});
-        Res.success(res,200,'取得貼文成功',data);
+        try{
+            const msg = '取得貼文成功';
+            const data = await Posts.find().populate({
+                path: 'user', //schema field name
+                select: 'userName userPhoto' // Display field name
+            })
+            Res.success(res, 200, msg, data);
+        } catch(e){
+            Res.error(res, 400, e.message);
+        }
     },
     post: async (req, res, next) => {
         try {
             const data = req.body;
             const newData = await Posts.create(data);
             const allData = await Posts.find().populate({
-                path: 'users',
+                path: 'user',
                 select: 'userName userPhoto'
             });
             const msg = '新增貼文成功';
-            Res.success(res,200,msg,{newData, allData});
+            Res.success(res,200,msg,{ newData, allData });
         } catch (e){
             Res.error(res, 400, e.message);
             // console.log(e)

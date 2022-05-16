@@ -1,9 +1,5 @@
 const mongoose = require('mongoose');
 const postSchemaSetting = {
-    userName: {
-        type: String,
-        required: [true, '貼文姓名未填寫'],
-    },
     tags: [
         {
             type: String,
@@ -38,10 +34,10 @@ const postSchemaSetting = {
         type: Number,
         default: 0,
     },
-    users: {
+    user: {
         type: mongoose.Schema.ObjectId,
-        ref: 'users',
-        slect: 'userName userPhoto'
+        ref: 'Users',
+        required: [true, '貼文 ID 未填寫']
     }
 
 }
