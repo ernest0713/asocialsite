@@ -1,5 +1,5 @@
 const Users = require('../models/users');
-const Res = require('../responseHandle')
+const Res = require('../responseHandle');
 
 const users = {
     getUserInfo: async (req, res, next) => {
