@@ -19,8 +19,8 @@ const postSchemaSetting = {
     },
     createAt: {
         type: Date,
-        default: Date.now,
-        select: false,
+        default: Date.now
+        // select: false, // 不回傳此欄位
     },
     content: {
         type: String,

@@ -4,11 +4,17 @@ const Res = require('../responseHandle');
 const posts = {
     get: async (req, res, next)=>{
         try{
+            const { sort, keyword } = req.query;
+            // console.log(req.query)
+            let filter = keyword ? { content: new RegExp(`${keyword}`)} : {};
+            let sortby = sort ? { createAt: 1 } : { createAt: -1 };
+            // console.log(filter, sortby)
             const msg = '取得貼文成功';
-            const data = await Posts.find().populate({
+            const data = await Posts.find(filter).sort(sortby).populate({
                 path: 'user', //schema field name
                 select: 'userName userPhoto' // Display field name
             })
+            console.log(data);
             Res.success(res, 200, msg, data);
         } catch(e){
             Res.error(res, 400, e.message);
