@@ -1,20 +1,20 @@
 {
 	"info": {
-		"_postman_id": "cdddcd46-cb0d-48bc-b41a-b32c0fb94fa8",
-		"name": "POSTS API (node live week3)",
+		"_postman_id": "efca45e0-62ef-476a-af2f-8d390425b253",
+		"name": "nodeJsLive api(week4 remote)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "取得所有貼文 Copy",
+			"name": "取得所有貼文",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://sheltered-fjord-83168.herokuapp.com/posts",
+					"raw": "https://desolate-sands-79385.herokuapp.com/posts",
 					"protocol": "https",
 					"host": [
-						"sheltered-fjord-83168",
+						"desolate-sands-79385",
 						"herokuapp",
 						"com"
 					],
@@ -26,13 +26,13 @@
 			"response": []
 		},
 		{
-			"name": "新增貼文 Copy",
+			"name": "新增貼文",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"userName\": \"Ray\",\r\n    \"tags\": \"post\",\r\n    \"content\": \"hello, Hexschool 2\"\r\n}",
+					"raw": "{\r\n    \"user\": \"628209336d0ee72a091ab661\",\r\n    \"content\": \"Hello hexschool \"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -40,10 +40,10 @@
 					}
 				},
 				"url": {
-					"raw": "https://sheltered-fjord-83168.herokuapp.com/posts",
+					"raw": "https://desolate-sands-79385.herokuapp.com/posts",
 					"protocol": "https",
 					"host": [
-						"sheltered-fjord-83168",
+						"desolate-sands-79385",
 						"herokuapp",
 						"com"
 					],
@@ -55,15 +55,15 @@
 			"response": []
 		},
 		{
-			"name": "刪除單筆貼文 Copy",
+			"name": "刪除單筆貼文",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "https://sheltered-fjord-83168.herokuapp.com/posts/:id",
+					"raw": "https://desolate-sands-79385.herokuapp.com/posts/:id",
 					"protocol": "https",
 					"host": [
-						"sheltered-fjord-83168",
+						"desolate-sands-79385",
 						"herokuapp",
 						"com"
 					],
@@ -74,7 +74,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "626d2b59c245ce0fa53e4a36"
+							"value": null
 						}
 					]
 				}
@@ -82,13 +82,13 @@
 			"response": []
 		},
 		{
-			"name": "修改貼文內容 Copy",
+			"name": "修改貼文內容",
 			"request": {
 				"method": "PATCH",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"content\": \"update data\"\r\n}",
+					"raw": "{\r\n    \"content\": \"update\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -96,21 +96,20 @@
 					}
 				},
 				"url": {
-					"raw": "https://sheltered-fjord-83168.herokuapp.com/posts/:id",
+					"raw": "https://desolate-sands-79385.herokuapp.com/:id",
 					"protocol": "https",
 					"host": [
-						"sheltered-fjord-83168",
+						"desolate-sands-79385",
 						"herokuapp",
 						"com"
 					],
 					"path": [
-						"posts",
 						":id"
 					],
 					"variable": [
 						{
 							"key": "id",
-							"value": "626d2b59c245ce0fa53e4a36"
+							"value": null
 						}
 					]
 				}
@@ -118,20 +117,49 @@
 			"response": []
 		},
 		{
-			"name": "刪除全部貼文 Copy",
+			"name": "刪除全部貼文",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "https://sheltered-fjord-83168.herokuapp.com/posts",
+					"raw": "https://desolate-sands-79385.herokuapp.com/posts",
 					"protocol": "https",
 					"host": [
-						"sheltered-fjord-83168",
+						"desolate-sands-79385",
 						"herokuapp",
 						"com"
 					],
 					"path": [
 						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "新增帳號",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"other@gmail.com\",\r\n    \"userName\": \"huahua\",\r\n    \"password\": \"Qqwert11\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://desolate-sands-79385.herokuapp.com/users",
+					"protocol": "https",
+					"host": [
+						"desolate-sands-79385",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users"
 					]
 				}
 			},
