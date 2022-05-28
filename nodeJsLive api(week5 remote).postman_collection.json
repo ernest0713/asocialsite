@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "efca45e0-62ef-476a-af2f-8d390425b253",
-		"name": "nodeJsLive api(week4 remote)",
+		"_postman_id": "7abc472b-3838-4898-bcee-baaed8a3d1df",
+		"name": "nodeJsLive api(week5 remote)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -11,12 +11,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://desolate-sands-79385.herokuapp.com/posts",
-					"protocol": "https",
+					"raw": "{{WEEK5_URL}}/posts",
 					"host": [
-						"desolate-sands-79385",
-						"herokuapp",
-						"com"
+						"{{WEEK5_URL}}"
 					],
 					"path": [
 						"posts"
@@ -40,15 +37,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://desolate-sands-79385.herokuapp.com/posts",
-					"protocol": "https",
+					"raw": "{{WEEK5_URL}}/post",
 					"host": [
-						"desolate-sands-79385",
-						"herokuapp",
-						"com"
+						"{{WEEK5_URL}}"
 					],
 					"path": [
-						"posts"
+						"post"
 					]
 				}
 			},
@@ -60,12 +54,9 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "https://desolate-sands-79385.herokuapp.com/posts/:id",
-					"protocol": "https",
+					"raw": "{{WEEK5_URL}}/posts/:id",
 					"host": [
-						"desolate-sands-79385",
-						"herokuapp",
-						"com"
+						"{{WEEK5_URL}}"
 					],
 					"path": [
 						"posts",
@@ -74,7 +65,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": null
+							"value": "6291f39bb75c51ec5fd4a6e7"
 						}
 					]
 				}
@@ -96,20 +87,18 @@
 					}
 				},
 				"url": {
-					"raw": "https://desolate-sands-79385.herokuapp.com/:id",
-					"protocol": "https",
+					"raw": "{{WEEK5_URL}}/posts/:id",
 					"host": [
-						"desolate-sands-79385",
-						"herokuapp",
-						"com"
+						"{{WEEK5_URL}}"
 					],
 					"path": [
+						"posts",
 						":id"
 					],
 					"variable": [
 						{
 							"key": "id",
-							"value": null
+							"value": "6291f37bb75c51ec5fd4a6e3"
 						}
 					]
 				}
@@ -122,12 +111,9 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "https://desolate-sands-79385.herokuapp.com/posts",
-					"protocol": "https",
+					"raw": "{{WEEK5_URL}}/posts",
 					"host": [
-						"desolate-sands-79385",
-						"herokuapp",
-						"com"
+						"{{WEEK5_URL}}"
 					],
 					"path": [
 						"posts"
@@ -151,12 +137,9 @@
 					}
 				},
 				"url": {
-					"raw": "https://desolate-sands-79385.herokuapp.com/users",
-					"protocol": "https",
+					"raw": "{{WEEK5_URL}}/users",
 					"host": [
-						"desolate-sands-79385",
-						"herokuapp",
-						"com"
+						"{{WEEK5_URL}}"
 					],
 					"path": [
 						"users"
