@@ -1,95 +1,75 @@
 const Posts = require('../models/posts');
-const Res = require('../responseHandle');
+const { hasSuccess, hasError  } = require('../responseHandle');
 
 const posts = {
     get: async (req, res, next)=>{
-        try{
-            const { sort, keyword } = req.query;
-            console.log(req.query)
-            let filter = keyword ? { content: new RegExp(`${keyword}`)} : {};
-            let sortby = sort ? { createAt: sort } : { createAt: -1 };
-            console.log(filter, sortby)
-            const msg = '取得貼文成功';
-            const data = await Posts.find(filter).sort(sortby).populate({
-                path: 'user', //schema field name
-                select: 'userName userPhoto' // Display field name
-            })
-            // console.log(data);
-            Res.success(res, 200, msg, data);
-        } catch(e){
-            Res.error(res, 400, e.message);
-        }
+        const { sort, keyword } = req.query;
+        let filter = keyword ? { content: new RegExp(`${keyword}`)} : {};
+        let sortby = sort ? { createAt: sort } : { createAt: -1 };
+        // console.log(filter, sortby)
+        const data = await Posts.find(filter).sort(sortby).populate({
+            path: 'user', // 設定 schema 的欄位名稱
+            select: 'userName userPhoto' // 要顯示的欄位資訊
+        })
+        // console.log(data);
+        hasSuccess(res, 200, data);
     },
     post: async (req, res, next) => {
-        try {
-            const data = req.body;
-            const newData = await Posts.create(data);
-            const allData = await Posts.find().populate({
-                path: 'user',
-                select: 'userName userPhoto'
-            });
-            const msg = '新增貼文成功';
-            Res.success(res,200,msg,{ newData, allData });
-        } catch (e){
-            Res.error(res, 400, e.message);
-            // console.log(e)
+        // 待新增需驗證的資訊
+        const data = req.body;
+        if(!data.user || !data.content){
+            // console.log(data.user, data.content)
+            const errMsg = '資料格式錯誤';
+            return next( hasError(404, errMsg, next) )
         }
+        const newData = await Posts.create(data);
+        const allData = await Posts.find().populate({
+            path: 'user',
+            select: 'userName userPhoto'
+        });
+        hasSuccess(res, 200, { newData, allData });
     },
     deleteMany:  async (req, res, next) => {
-        try {
-            if(req.originalUrl.startsWith("/posts/")){
-                const msg = 'API錯誤，或未填寫ID，未刪除任何資料。';
-                Res.error(res, 404, msg)
-            }else {
-                const delCount = (await Posts.deleteMany({})).deletedCount;
-                const msg = `全部貼文已刪除，共刪除 ${delCount} 筆資料`
-                Res.success(res, 200, msg)
-            }
-        } catch (e){
-            Res.error(res, 400, e.message);
+        if(req.originalUrl.startsWith("/posts/")){
+            const errMsg = 'API錯誤，或未填寫ID，未刪除任何資料。';
+            return next( hasError(404, errMsg, next) )
         }
+        const result = await Posts.deleteMany({});
+        // console.log(typeof(result.deletedCount))
+        let msg = '';
+        if( !result.deletedCount ) {
+            msg = `資料庫已無貼文`;
+        } else {
+            msg = `共刪除 ${ result.deletedCount }筆資料`;
+        }
+        hasSuccess(res, 200, { msg })
     },
     deleteOne: async (req, res, next)=>{
-        try{
-            const deleteData = await Posts.findByIdAndDelete(req.params.id);
-            // console.log(_id,deleteData,deletedCount);
-            if(deleteData !== null){
-                const msg = '資料刪除成功!'
-                Res.success(res, 200, msg,deleteData);
-            } else {
-                const msg =  '查無此筆資料！';
-                Res.error(res, 404, msg);
+            const result = await Posts.findByIdAndDelete(req.params.id);
+            if(result == null){
+                const errMsg =  '查無此筆資料！';
+                return next( hasError(404, errMsg, next) )
             }
-        }catch(e){
-            Res.error(res, 404, e.message);
-            // console.log(e);
-        }
+            hasSuccess(res, 200, result);
     },
-    update:  async (req, res, next)=>{
-        try {
-            const option = {
-                new: true,
-                runValidators: true
-            }
-            const data = req.body;
-            if(data.content.trim().length === 0 ) {
-                const msg = 'content不可為空';
-                Res.error(res, 400, msg)
-            } else {
-                const result = await Posts.findByIdAndUpdate(req.params.id, data, option);
-                if( result != null){
-                    const msg = '資料修改成功!';
-                    Res.success(res, 200, msg, result)
-                } else {
-                    const msg = '資料修改失敗，或無此筆資料!';
-                    es.error(res, 404, msg)
-                }
-            }
-        } catch (e) {
-            Res.error(res, 400, e.message);
-            // console.log(e);
+    update: async (req, res, next)=>{
+        const option = {
+            new: true,
+            runValidators: true
         }
-
+        const data = req.body;
+        if(data.content.trim().length === 0 ) {
+            const errMsg = 'content不可為空';
+            return next( hasError(400, errMsg, next) )
+        } else {
+            const result = await Posts.findByIdAndUpdate(req.params.id, data, option);
+            if( result != null){
+                hasSuccess(res, 200, result)
+            } else {
+                const errMsg = '資料修改失敗，或無此筆資料!';
+                return next( hasError(400, errMsg, next) )
+            }
+        }
     }
 }
 
