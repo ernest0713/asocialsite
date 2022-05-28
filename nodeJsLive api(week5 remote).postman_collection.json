@@ -54,18 +54,18 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{WEEK5_URL}}/posts/:id",
+					"raw": "{{WEEK5_URL}}/post/:id",
 					"host": [
 						"{{WEEK5_URL}}"
 					],
 					"path": [
-						"posts",
+						"post",
 						":id"
 					],
 					"variable": [
 						{
 							"key": "id",
-							"value": "6291f39bb75c51ec5fd4a6e7"
+							"value": "629226259a780753808ffde6"
 						}
 					]
 				}
@@ -87,18 +87,18 @@
 					}
 				},
 				"url": {
-					"raw": "{{WEEK5_URL}}/posts/:id",
+					"raw": "{{WEEK5_URL}}/post/:id",
 					"host": [
 						"{{WEEK5_URL}}"
 					],
 					"path": [
-						"posts",
+						"post",
 						":id"
 					],
 					"variable": [
 						{
 							"key": "id",
-							"value": "6291f37bb75c51ec5fd4a6e3"
+							"value": "629226239a780753808ffde1"
 						}
 					]
 				}
