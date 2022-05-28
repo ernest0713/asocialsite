@@ -1,11 +1,12 @@
 const Posts = require('../models/posts');
+const Users = require('../models/users');
 const { hasSuccess, hasError  } = require('../responseHandle');
 
 const posts = {
     get: async (req, res, next)=>{
         const { sort, keyword } = req.query;
         let filter = keyword ? { content: new RegExp(`${keyword}`)} : {};
-        let sortby = sort ? { createAt: sort } : { createAt: -1 };
+        let sortby = sort === 'asc' ? { createAt: 1 } : { createAt: -1 };
         // console.log(filter, sortby)
         const data = await Posts.find(filter).sort(sortby).populate({
             path: 'user', // 設定 schema 的欄位名稱
@@ -20,14 +21,21 @@ const posts = {
         if(!data.user || !data.content){
             // console.log(data.user, data.content)
             const errMsg = '資料格式錯誤';
-            return next( hasError(404, errMsg, next) )
+            return next( hasError(400, errMsg, next) )
         }
-        const newData = await Posts.create(data);
-        const allData = await Posts.find().populate({
-            path: 'user',
-            select: 'userName userPhoto'
-        });
-        hasSuccess(res, 200, { newData, allData });
+        const hasUser = await Users.findById(data.user).exec() // 如果找不到就是 null
+        // console.log(hasUser);
+        if( hasUser ){
+            const newData = await Posts.create(data);
+            const allData = await Posts.find().populate({
+                path: 'user',
+                select: 'userName userPhoto'
+            });
+            hasSuccess(res, 200, { newData, allData });
+        } else {
+            const errMsg = '找不到使用者';
+            return next( hasError(400, errMsg, next) )
+        }
     },
     deleteMany:  async (req, res, next) => {
         if(req.originalUrl.startsWith("/posts/")){
@@ -62,7 +70,8 @@ const posts = {
             const errMsg = 'content不可為空';
             return next( hasError(400, errMsg, next) )
         } else {
-            const result = await Posts.findByIdAndUpdate(req.params.id, data, option);
+            const { tags, type, image, content } = await Posts.findByIdAndUpdate(req.params.id, data, option);
+            const result = { tags, type, image, content };
             if( result != null){
                 hasSuccess(res, 200, result)
             } else {

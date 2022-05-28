@@ -37,7 +37,7 @@ const postSchemaSetting = {
     user: {
         type: mongoose.Schema.ObjectId,
         ref: 'Users',
-        required: [true, '貼文 ID 未填寫']
+        required: [true, '使用者 ID 未填寫']
     }
 
 }
