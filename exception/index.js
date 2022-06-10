@@ -49,6 +49,7 @@ const errorResponder = (err, req, res, next) => {
     err.statusCode = 400;
     if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
         err.message = '請輸入正確的JSON格式'
+        err.isOperational = true;
     }
     // dev
     if (process.env.NODE_ENV === "dev") {
