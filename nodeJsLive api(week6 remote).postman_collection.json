@@ -1,0 +1,331 @@
+{
+	"info": {
+		"_postman_id": "4fc9c16d-2908-42d2-bb8f-1b9fdcb60f29",
+		"name": "nodeJsLive api(week6 remote)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9556961"
+	},
+	"item": [
+		{
+			"name": "取得所有貼文",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"description": "Bearer Token",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{weekSix_host}}/posts",
+					"host": [
+						"{{weekSix_host}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "新增貼文",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"person\",\r\n    \"content\": \"Hello hexschool \",\r\n    \"tags\": \"tag\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{weekSix_host}}/post",
+					"host": [
+						"{{weekSix_host}}"
+					],
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "刪除單筆貼文",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{weekSix_host}}/post/:id",
+					"host": [
+						"{{weekSix_host}}"
+					],
+					"path": [
+						"post",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62a21665bbf16b4da3412903"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "修改貼文內容",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"group\",\r\n    \"content\": \"hehe\",\r\n    \"tags\": \"hello\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{weekSix_host}}/post/:id",
+					"host": [
+						"{{weekSix_host}}"
+					],
+					"path": [
+						"post",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62a34feca17ff247e5701b9a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "刪除全部貼文",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{weekSix_host}}/posts",
+					"host": [
+						"{{weekSix_host}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "使用者註冊",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"john@gmail.com\",\r\n    \"userName\": \"john\",\r\n    \"password\": \"Qwer123456\",\r\n    \"confirmPassword\": \"Qwer123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{weekSix_host}}/register",
+					"host": [
+						"{{weekSix_host}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "使用者登入",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"john@gmail.com\",\r\n    \"password\": \"Qwer123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{weekSix_host}}/login",
+					"host": [
+						"{{weekSix_host}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "使用者更新密碼",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"description": "Bearer Token",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\": \"Xwer123456222\",\r\n    \"confirmPassword\": \"Xwer123456222\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{weekSix_host}}/user/updatePassword",
+					"host": [
+						"{{weekSix_host}}"
+					],
+					"path": [
+						"user",
+						"updatePassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "取得使用者資訊",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"description": "Bearer Token",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{weekSix_host}}/user/perfile/62a35aa438f40e3cf42abb15",
+					"host": [
+						"{{weekSix_host}}"
+					],
+					"path": [
+						"user",
+						"perfile",
+						"62a35aa438f40e3cf42abb15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "更新使用者資訊",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"description": "Bearer Token",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"gender\": \"none\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{weekSix_host}}/user/perfile/62a1bd9b46f1c0d0e55079a1",
+					"host": [
+						"{{weekSix_host}}"
+					],
+					"path": [
+						"user",
+						"perfile",
+						"62a1bd9b46f1c0d0e55079a1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "weekSix_host",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
