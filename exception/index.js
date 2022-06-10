@@ -1,4 +1,3 @@
-const { hasError } = require('../responseHandle');
 
 // 程式相關錯誤
 const processError = err => {
@@ -30,9 +29,9 @@ const resErrorProd = (err, res) => {
     if (err.isOperational) {
         const code = err.statusCode;
         const msg = err.message
-        res.status(err.statusCode).json({
+        res.status(code).json({
             success: false,
-            message: err.message
+            message: msg
         })
     } else {
         // log 紀錄
@@ -47,7 +46,10 @@ const resErrorProd = (err, res) => {
 
 // 錯誤處理, error handler, final
 const errorResponder = (err, req, res, next) => {
-    err.statusCode = err.statusCode || 500;
+    err.statusCode = 400;
+    if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
+        err.message = '請輸入正確的JSON格式'
+    }
     // dev
     if (process.env.NODE_ENV === "dev") {
         return resErrorDev(err, res);

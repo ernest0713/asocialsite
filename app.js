@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // 路由設定
 app.use('/', indexRouter);
 app.use(postsRouter);
-app.use('/users', usersRouter);
+app.use(usersRouter);
 
 // 無設定路由迴船 404
 app.use(error404);
