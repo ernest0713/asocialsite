@@ -3,28 +3,73 @@ const mongoose = require('mongoose');
 const userSchemaSetting = {
     email: {
         type: String,
-        required: [true, '帳戶需填寫']
-    },
-    password: {
-        type: String,
-        min: [6, '密碼需大於6個字元'],
-        max: [15, '密碼需低於15個字元'],
-        required: [true, '密碼需填寫']
+        required: [true, 'email為必填欄位'],
+        unique: true,
+        lowercase: true,
+        select: false,
     },
     userName: {
         type: String,
-        required: [ true , '姓名欄位未填寫' ]
+        required: [true, '暱稱未填寫'],
     },
-    userPhoto: {
+    password: {
         type: String,
-        default: 'https://reurl.cc/Xjmakg',
+        validate: {
+            validator: function(v) {
+              return new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,16}$/, 'g')
+            },
+            message: () => '密碼格式錯誤'
+        },
+        required: [true, '尚未設定密碼'],
+        select: false,
+    },
+    avatar: {
+        type: String,
+        default: 'https://randomuser.me/api/portraits/lego/3.jpg',
+    },
+    gender: {
+        type: String,
+        enum: ['female', 'male', 'none'],
+        default: 'none',
+    },
+    follow: {
+        type: [
+            {
+                id: {
+                type: mongoose.Schema.ObjectId,
+                ref: 'User',
+                required: [true, '使用者資訊未填寫'],
+                },
+                datetime_update: { type: Date, default: Date.now },
+            }
+        ],
+        default: [],
+    },
+    beFollowed: {
+        type: [
+        {
+            id: {
+            type: mongoose.Schema.ObjectId,
+            ref: 'User',
+            required: [true, '使用者資訊未填寫'],
+            },
+            datetime_update: { type: Date, default: Date.now },
+        },
+        ],
+        default: [],
+    },
+    likeList: {
+        type: [String],
+        default: [],
     },
     createAt: {
         type: Date,
         default: Date.now,
-        select: false,
     },
-
+    updateAt: {
+        type: Date,
+        default: Date.now,
+    }
 }
 
 const userSchemaOption = {
