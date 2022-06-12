@@ -13,6 +13,7 @@ require('./connections/db_connect');
 const indexRouter = require('./routes/index');
 const postsRouter = require('./routes/posts');
 const usersRouter = require('./routes/users');
+const filesRouter = require('./routes/files');
 
 const { processError, unhandledRejection, error404, errorResponder } = require('./exception');
 
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use(postsRouter);
 app.use(usersRouter);
+app.use(filesRouter);
 
 // 無設定路由迴船 404
 app.use(error404);
